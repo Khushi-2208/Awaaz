@@ -179,7 +179,7 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-linear-to-br from-gray-50 via-blue-50 to-indigo-50">
       {/* Header */}
       <header className="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-100">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
@@ -195,7 +195,7 @@ export default function Page() {
       </div>
       <button
         onClick={handleLogout}
-        className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-sm hover:shadow-md font-medium text-sm"
+        className="flex items-center gap-2 px-5 py-2.5 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-full hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-sm hover:shadow-md font-medium text-sm"
       >
         <LogOut className="w-4 h-4" />
         <span>Logout</span>
@@ -225,8 +225,8 @@ export default function Page() {
                 onClick={toggleListening}
                 className={`w-16 h-16 md:w-20 md:h-20 rounded-full transition-all shadow-xl flex items-center justify-center ${
                   isListening 
-                    ? 'bg-gradient-to-br from-orange-500 to-red-500 text-white animate-pulse scale-110 ring-4 ring-orange-200' 
-                    : 'bg-gradient-to-br from-orange-500 to-orange-600 text-white hover:scale-105 hover:shadow-2xl'
+                    ? 'bg-linear-to-br from-orange-500 to-red-500 text-white animate-pulse scale-110 ring-4 ring-orange-200' 
+                    : 'bg-linear-to-br from-orange-500 to-orange-600 text-white hover:scale-105 hover:shadow-2xl'
                 }`}
               >
                 {isListening ? <MicOff className="w-8 h-8 md:w-10 md:h-10" /> : <Mic className="w-8 h-8 md:w-10 md:h-10" />}
@@ -249,7 +249,7 @@ export default function Page() {
               <button
                 onClick={handleSubmit}
                 disabled={isLoading || !inputText.trim()}
-                className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-full hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100 transition-all shadow-xl flex items-center justify-center"
+                className="w-16 h-16 md:w-20 md:h-20 bg-linear-to-br from-green-500 to-green-600 text-white rounded-full hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:scale-100 transition-all shadow-xl flex items-center justify-center"
               >
                 <Send className="w-7 h-7 md:w-9 md:h-9" />
               </button>
@@ -298,7 +298,7 @@ export default function Page() {
                     style={{ animationDelay: `${index * 100}ms` }}
                   >
                     {/* Category Header */}
-                    <div className={`bg-gradient-to-r ${colors.bg} text-white p-6 relative overflow-hidden`}>
+                    <div className={`bg-linear-to-r ${colors.bg} text-white p-6 relative overflow-hidden`}>
                       <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
                       <div className="relative z-10">
                         <div className="flex justify-between items-start mb-4">
@@ -333,7 +333,7 @@ export default function Page() {
                       {scheme.eligibility && (
                         <div className="mb-5">
                           <h5 className={`font-bold text-gray-900 mb-2 flex items-center gap-2 ${colors.text}`}>
-                            <div className={`w-2 h-2 ${colors.bg} bg-gradient-to-r rounded-full`}></div>
+                            <div className={`w-2 h-2 ${colors.bg} bg-linear-to-r rounded-full`}></div>
                             Eligibility / पात्रता
                           </h5>
                           <p className="text-gray-700 text-sm leading-relaxed">{scheme.eligibility}</p>
@@ -343,7 +343,7 @@ export default function Page() {
                       {scheme.benefits && (
                         <div className="mb-6">
                           <h5 className={`font-bold text-gray-900 mb-2 flex items-center gap-2 ${colors.text}`}>
-                            <div className={`w-2 h-2 ${colors.bg} bg-gradient-to-r rounded-full`}></div>
+                            <div className={`w-2 h-2 ${colors.bg} bg-linear-to-r rounded-full`}></div>
                             Benefits / लाभ
                           </h5>
                           <p className="text-gray-700 text-sm leading-relaxed">{scheme.benefits}</p>
@@ -355,7 +355,7 @@ export default function Page() {
                           href={scheme.applyLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`block w-full text-center bg-gradient-to-r ${colors.bg} text-white px-6 py-3.5 rounded-xl font-semibold hover:shadow-lg transition-all transform hover:scale-105`}
+                          className={`block w-full text-center bg-linear-to-r ${colors.bg} text-white px-6 py-3.5 rounded-xl font-semibold hover:shadow-lg transition-all transform hover:scale-105`}
                         >
                           Apply Now / आवेदन करें →
                         </a>
@@ -372,7 +372,7 @@ export default function Page() {
         {!isLoading && schemes.length === 0 && (
           <div className="text-center py-20">
             <div className="inline-block mb-6">
-              <div className="w-32 h-32 bg-gradient-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center">
+              <div className="w-32 h-32 bg-linear-to-br from-blue-100 to-indigo-100 rounded-full flex items-center justify-center">
                 <Search className="w-16 h-16 text-blue-600" />
               </div>
             </div>
