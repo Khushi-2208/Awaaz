@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
+  signOut
 } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { Mail, Lock, ArrowRight, ShieldCheck, Eye, EyeOff } from "lucide-react";
@@ -30,14 +31,13 @@ export default function AuthPage() {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(auth, provider);
-      router.push("/");
+      router.push("/dashboard");
     } catch {
       setError("Google login failed. Please try again.");
     } finally {
       setLoading(false);
     }
   };
-
   const handleEmailAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -49,7 +49,7 @@ export default function AuthPage() {
       } else {
         await signInWithEmailAndPassword(auth, email, password);
       }
-      router.push("/");
+      router.push("/dashboard");
     } catch {
       setError("Invalid email or password.");
     } finally {
@@ -76,7 +76,7 @@ export default function AuthPage() {
 
   const handleGuest = () => {
     localStorage.setItem("guest", "true");
-    router.push("/");
+    router.push("/dashboard");
   };
 
   return (

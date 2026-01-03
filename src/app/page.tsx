@@ -8,6 +8,7 @@ import {
   ArrowRight, Building2, GraduationCap,
   Stethoscope, Tractor, HeartHandshake, Smartphone, Quote, ChevronRight, ChevronDown, ChevronUp
 } from 'lucide-react';
+import Link from 'next/link';
 
 const HERO_SLIDES = [
   {
@@ -335,6 +336,7 @@ const AnimatedStat = ({ icon: Icon, value, label, suffix }: any) => {
 };
 
 const ProgrammeCard = ({ title, desc, color, count, icon: Icon }: any) => (
+  <Link href={`/schemes/${title}`}>
   <motion.div
     layout
     initial={{ opacity: 0, scale: 0.9 }}
@@ -361,7 +363,7 @@ const ProgrammeCard = ({ title, desc, color, count, icon: Icon }: any) => (
         Read More <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
       </div>
     </div>
-  </motion.div>
+  </motion.div> </Link>
 );
 
 const TestimonialCard = ({ name, location, role, quote }: any) => (
