@@ -44,7 +44,7 @@ const PROGRAMMES = [
   { id: 1, title: "Education", desc: "Scholarships, loans, and skill development.", color: "bg-blue-600", icon: GraduationCap },
   { id: 2, title: "Healthcare", desc: "Insurance, medicine, and maternity benefits.", color: "bg-rose-600", icon: Stethoscope },
   { id: 3, title: "Livelihood", desc: "Employment, MNREGA, and business loans.", color: "bg-green-600", icon: Tractor },
-  { id: 4, title: "Women Power", desc: "Pension, safety, and self-help group funding.", color: "bg-orange-600", icon: Users },
+  { id: 4, title: "Women", desc: "Pension, safety, and self-help group funding.", color: "bg-orange-600", icon: Users },
   { id: 5, title: "Housing", desc: "Affordable housing and water connection schemes.", color: "bg-teal-600", icon: Building2 },
   { id: 6, title: "Social Security", desc: "Old age pensions and disability support.", color: "bg-yellow-600", icon: ShieldCheck },
   { id: 7, title: "Digital Literacy", desc: "Free computer training and device access.", color: "bg-indigo-600", icon: Smartphone },
