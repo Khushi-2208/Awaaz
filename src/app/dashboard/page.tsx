@@ -276,19 +276,24 @@ export default function Dashboard() {
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="bg-white rounded-[3rem] p-6 shadow-2xl shadow-orange-900/40"
+            className="bg-white rounded-[2rem] md:rounded-[3rem] p-4 md:p-6 shadow-2xl shadow-orange-900/40"
           >
-            <div className="relative flex items-center bg-slate-50 rounded-[2.5rem] border-2 border-slate-200 focus-within:border-orange-400 focus-within:ring-4 focus-within:ring-orange-100 transition-all p-4">
+            <div className="relative flex items-center bg-slate-50 rounded-3xl md:rounded-[2.5rem] border-2 border-slate-200 focus-within:border-orange-400 focus-within:ring-4 focus-within:ring-orange-100 transition-all p-2 md:p-4">
               
               <button
                 onClick={toggleListening}
-                className={`flex-shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-[2rem] flex items-center justify-center transition-all shadow-lg ${
+                className={`flex-shrink-0 w-16 h-16 md:w-32 md:h-32 rounded-2xl md:rounded-[2rem] flex items-center justify-center transition-all shadow-lg ${
                   isListening 
                   ? 'bg-red-500 text-white animate-pulse' 
                   : 'bg-gradient-to-br from-orange-500 to-orange-600 text-white hover:scale-105'
                 }`}
               >
-                {isListening ? <MicOff size={56} /> : <Mic size={56} />}
+                {/* Responsive Icon Size */}
+                {isListening ? (
+                  <MicOff className="w-8 h-8 md:w-14 md:h-14" />
+                ) : (
+                  <Mic className="w-8 h-8 md:w-14 md:h-14" />
+                )}
               </button>
 
               <input
@@ -296,24 +301,28 @@ export default function Dashboard() {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-                placeholder={isListening ? "Listening... (बोलिये)" : "Type or speak here..."}
-                className="flex-1 bg-transparent border-none focus:ring-0 text-2xl md:text-4xl px-6 md:px-10 text-slate-800 placeholder:text-slate-400 h-full font-medium"
+                placeholder={isListening ? "Listening..." : "Type or speak..."}
+                className="flex-1 bg-transparent border-none focus:ring-0 text-lg md:text-4xl px-3 md:px-10 text-slate-800 placeholder:text-slate-400 h-full font-medium"
               />
 
               <button
                 onClick={() => handleSubmit()}
                 disabled={!inputText.trim() || isLoading}
-                className="flex-shrink-0 w-20 h-20 md:w-24 md:h-24 mr-2 bg-slate-900 text-white rounded-[2rem] flex items-center justify-center hover:bg-slate-800 disabled:opacity-50 disabled:hover:bg-slate-900 transition-colors shadow-md"
+                className="flex-shrink-0 w-14 h-14 md:w-24 md:h-24 mr-1 md:mr-2 bg-slate-900 text-white rounded-xl md:rounded-[2rem] flex items-center justify-center hover:bg-slate-800 disabled:opacity-50 disabled:hover:bg-slate-900 transition-colors shadow-md"
               >
-                {isLoading ? <span className="animate-spin text-3xl">⟳</span> : <Send size={40} />}
+                {isLoading ? (
+                  <span className="animate-spin text-xl md:text-3xl">⟳</span> 
+                ) : (
+                  <Send className="w-6 h-6 md:w-10 md:h-10" />
+                )}
               </button>
             </div>
             
-            <div className="flex flex-wrap gap-3 justify-center mt-8 px-2 pb-2">
-              <span className="text-sm text-slate-400 uppercase font-bold tracking-wider mr-2 pt-2">Try asking / पूछें:</span>
+            <div className="flex flex-wrap gap-2 md:gap-3 justify-center mt-4 md:mt-8 px-2 pb-2">
+              <span className="text-xs md:text-sm text-slate-400 uppercase font-bold tracking-wider mr-2 pt-2">Try asking:</span>
               <QuickChip text="Education Loan" onClick={() => handleSubmit("I need education loan")} />
               <QuickChip text="रोजगार" onClick={() => handleSubmit("मैं 40 साल का पुरुष हूं मेरे लिए योजना बताएं")} />
-              <QuickChip text="महिला सुरक्षा खातिर योजना" onClick={() => handleSubmit("महिला सुरक्षा खातिर योजना")} />
+              <QuickChip text="महिला सुरक्षा" onClick={() => handleSubmit("महिला सुरक्षा खातिर योजना")} />
             </div>
           </motion.div>
         </div>
@@ -326,24 +335,23 @@ export default function Dashboard() {
         {isLoading && (
           <div className="bg-white rounded-3xl p-12 text-center shadow-xl border border-orange-100 min-h-[400px] flex flex-col items-center justify-center mt-12">
             <div className="w-24 h-24 border-8 border-orange-100 border-t-orange-600 rounded-full animate-spin mb-8"></div>
-            <h3 className="text-3xl font-bold text-slate-800 animate-pulse">Searching / खोज रहे हैं...</h3>
-            <p className="text-slate-500 mt-4 text-xl">Finding the best schemes for you.</p>
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-800 animate-pulse">Searching / खोज रहे हैं...</h3>
+            <p className="text-slate-500 mt-4 text-lg md:text-xl">Finding the best schemes for you.</p>
           </div>
         )}
 
         {/* --- RECENTLY VIEWED SECTION --- */}
-        {/* Shows when logged in and NO search results yet */}
         {!isLoading && recentSchemes.length > 0 && schemes.length === 0 && (
           <div className="mt-16 mb-8 animate-fadeIn">
              <div className="flex items-center gap-3 mb-6 px-4">
                 <div className="p-2.5 bg-orange-100 rounded-xl text-orange-600 shadow-sm"><Clock size={28}/></div>
-                <h3 className="text-2xl font-bold text-slate-800">Recently Viewed / हाल ही में देखा गया</h3>
+                <h3 className="text-xl md:text-2xl font-bold text-slate-800">Recently Viewed / हाल ही में देखा गया</h3>
              </div>
              
              {/* Horizontal Scrolling List */}
-             <div className="flex gap-6 overflow-x-auto pb-8 pt-2 px-4 scrollbar-hide">
+             <div className="flex gap-4 md:gap-6 overflow-x-auto pb-8 pt-2 px-4 scrollbar-hide">
                 {recentSchemes.map((scheme, index) => (
-                  <div key={`${scheme.id}-${index}`} className="min-w-[320px] w-[320px]">
+                  <div key={`${scheme.id}-${index}`} className="min-w-[280px] md:min-w-[320px] w-[280px] md:w-[320px]">
                     <SchemeCard 
                       scheme={scheme} 
                       index={index} 
@@ -353,7 +361,7 @@ export default function Dashboard() {
                       getCategoryIcon={getCategoryIcon}
                       detectLanguage={detectLanguage}
                       onApply={() => handleSchemeClick(scheme)}
-                      isCompact={true}
+                      isCompact={true} 
                     />
                   </div>
                 ))}
@@ -365,13 +373,13 @@ export default function Dashboard() {
         {!isLoading && schemes.length > 0 && (
           <div className="space-y-8 mt-12">
             <div className="flex items-center justify-between mb-6 px-2">
-              <h2 className="text-3xl font-bold flex items-center gap-3 text-slate-800">
+              <h2 className="text-2xl md:text-3xl font-bold flex items-center gap-3 text-slate-800">
                 <div className="p-2 bg-yellow-100 rounded-lg text-yellow-600"><Sparkles size={24}/></div>
                 Found {schemes.length} Schemes
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               <AnimatePresence>
                 {schemes.map((scheme, index) => (
                   <SchemeCard 
@@ -397,44 +405,44 @@ export default function Dashboard() {
             
             {/* Left Col */}
             <div className="lg:col-span-2 space-y-8">
-              <div className="bg-white rounded-3xl p-10 shadow-lg border border-slate-100">
+              <div className="bg-white rounded-3xl p-6 md:p-10 shadow-lg border border-slate-100">
                 <div className="flex items-center gap-4 mb-8">
                   <div className="p-4 bg-blue-50 text-blue-600 rounded-2xl">
                     <Languages size={32} />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-slate-900">We speak your language</h3>
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-900">We speak your language</h3>
                     <p className="text-slate-500">हम आपकी भाषा समझते हैं / हम रउआ भाषा बुझीला</p>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                   <LanguageCard lang="English" script="Hello" sub="Ask naturally" color="bg-orange-50 text-orange-800 border-orange-100" />
                   <LanguageCard lang="Hindi" script="नमस्ते" sub="हिंदी में पूछें" color="bg-green-50 text-green-800 border-green-100" />
                   <LanguageCard lang="Bhojpuri" script="प्रणाम" sub="रउआ पूछ सकत बानी" color="bg-purple-50 text-purple-800 border-purple-100" />
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-10 text-white shadow-xl relative overflow-hidden">
+              <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-6 md:p-10 text-white shadow-xl relative overflow-hidden">
                 <div className="relative z-10">
-                  <h3 className="text-3xl font-bold mb-2">Need help getting started?</h3>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-2">Need help getting started?</h3>
                   <p className="text-slate-400 mb-6 text-lg">शुरुआत करने में मदद चाहिए? / शुरुआत करे में मदद चाही?</p>
                   
-                  <div className="space-y-6 mb-8">
+                  <div className="space-y-4 md:space-y-6 mb-8">
                     <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/10">
                       <p className="text-sm text-slate-400 uppercase font-bold mb-1">Try saying:</p>
-                      <p className="text-lg text-white">"Suggest some employment related government schemes for a 40 years old."</p>
+                      <p className="text-lg text-white">"I am a student from Bihar looking for education loan."</p>
                     </div>
                     <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/10">
                       <p className="text-sm text-slate-400 uppercase font-bold mb-1">कोशिश करें:</p>
-                      <p className="text-lg text-white">"40 वर्ष के व्यक्ति के लिए रोजगार संबंधी कुछ सरकारी योजनाएं सुझाएं।"</p>
+                      <p className="text-lg text-white">"मैं बिहार का एक छात्र हूँ और मुझे शिक्षा लोन चाहिए।"</p>
                     </div>
                     <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/10">
                       <p className="text-sm text-slate-400 uppercase font-bold mb-1">ई बोल के देखीं:</p>
-                      <p className="text-lg text-white">"40 साल के व्यक्ति खातिर नौकरी अउरी रोज़गार से जुड़ल कुछ सरकारी योजना बताईं।"</p>
+                      <p className="text-lg text-white">"हम बिहार के छात्र बानी, हमरा पढ़ाई खातिर लोन चाही।"</p>
                     </div>
                   </div>
 
-                  <button onClick={toggleListening} className="bg-white text-slate-900 px-8 py-4 rounded-full font-bold hover:bg-orange-400 hover:text-white transition-all flex items-center gap-3 text-lg shadow-lg">
+                  <button onClick={toggleListening} className="bg-white text-slate-900 px-6 py-3 md:px-8 md:py-4 rounded-full font-bold hover:bg-orange-400 hover:text-white transition-all flex items-center gap-3 text-lg shadow-lg w-full md:w-auto justify-center">
                     <Mic size={24} /> Tap to Speak Now
                   </button>
                 </div>
@@ -445,7 +453,7 @@ export default function Dashboard() {
             </div>
 
             {/* Right Col */}
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-slate-100 h-fit">
+            <div className="bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-slate-100 h-fit">
               <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                 <Search size={22} className="text-orange-500" /> Browse Topics / विषय
               </h3>
@@ -469,7 +477,7 @@ export default function Dashboard() {
 const QuickChip = ({ text, onClick }: { text: string, onClick: () => void }) => (
   <button 
     onClick={onClick}
-    className="px-4 py-2 bg-slate-100 hover:bg-orange-100 hover:text-orange-700 text-slate-600 rounded-full text-sm font-medium transition-colors border border-slate-200 hover:border-orange-200"
+    className="px-3 md:px-4 py-2 bg-slate-100 hover:bg-orange-100 hover:text-orange-700 text-slate-600 rounded-full text-xs md:text-sm font-medium transition-colors border border-slate-200 hover:border-orange-200"
   >
     {text}
   </button>
@@ -477,7 +485,7 @@ const QuickChip = ({ text, onClick }: { text: string, onClick: () => void }) => 
 
 const LanguageCard = ({ lang, script, sub, color }: any) => (
   <div className={`p-6 rounded-2xl ${color} border hover:shadow-md transition-all cursor-default`}>
-    <div className="text-3xl font-bold mb-2">{script}</div>
+    <div className="text-2xl md:text-3xl font-bold mb-2">{script}</div>
     <div className="font-bold text-lg opacity-90">{lang}</div>
     <div className="text-sm opacity-70 mt-1">{sub}</div>
   </div>
@@ -490,7 +498,7 @@ const TopicRow = ({ icon, text, onClick }: any) => (
   >
     <div className="flex items-center gap-4 text-slate-600 group-hover:text-orange-700 font-medium text-lg">
       <div className="bg-slate-100 p-2 rounded-lg group-hover:bg-white transition-colors">{icon}</div>
-      <span>{text}</span>
+      <span className="text-base md:text-lg">{text}</span>
     </div>
     <ArrowRight size={18} className="text-slate-300 group-hover:text-orange-500 transform group-hover:translate-x-1 transition-all"/>
   </button>
@@ -506,7 +514,7 @@ const SchemeCard = ({ scheme, index, onSpeak, isSpeaking, getCategoryColor, getC
       transition={{ delay: index * 0.1 }}
       className={`bg-white rounded-3xl shadow-md border border-slate-100 overflow-hidden hover:shadow-2xl transition-all duration-300 group flex flex-col h-full ${isCompact ? 'scale-95' : ''}`}
     >
-      <div className={`p-8 pb-4 ${isCompact ? 'p-6 pb-2' : ''}`}>
+      <div className={`p-6 md:p-8 pb-4 ${isCompact ? 'p-6 pb-2' : ''}`}>
         <div className="flex justify-between items-start mb-6">
           <div className={`px-4 py-2 rounded-full text-xs font-bold flex items-center gap-2 uppercase tracking-wide border ${styles}`}>
             {getCategoryIcon(scheme.category)}
@@ -527,7 +535,7 @@ const SchemeCard = ({ scheme, index, onSpeak, isSpeaking, getCategoryColor, getC
             {isSpeaking ? <Volume2 size={22} /> : <Volume2 size={22} />}
           </button>
         </div>
-        <h3 className={`font-bold text-slate-900 leading-tight mb-2 group-hover:text-orange-600 transition-colors ${isCompact ? 'text-lg' : 'text-2xl'}`}>
+        <h3 className={`font-bold text-slate-900 leading-tight mb-2 group-hover:text-orange-600 transition-colors ${isCompact ? 'text-lg' : 'text-xl md:text-2xl'}`}>
           {scheme.name}
         </h3>
         {scheme.targetState && (
@@ -538,7 +546,7 @@ const SchemeCard = ({ scheme, index, onSpeak, isSpeaking, getCategoryColor, getC
       </div>
 
       {!isCompact && (
-        <div className="px-8 py-6 border-t border-slate-50 bg-slate-50/50 flex-grow space-y-6">
+        <div className="px-6 md:px-8 py-6 border-t border-slate-50 bg-slate-50/50 flex-grow space-y-6">
           <div>
             <h4 className="text-xs font-bold text-slate-400 uppercase mb-2 tracking-widest">Eligibility / पात्रता</h4>
             <p className="text-slate-700 leading-relaxed line-clamp-3 hover:line-clamp-none transition-all">
