@@ -312,8 +312,8 @@ export default function Dashboard() {
             <div className="flex flex-wrap gap-3 justify-center mt-8 px-2 pb-2">
               <span className="text-sm text-slate-400 uppercase font-bold tracking-wider mr-2 pt-2">Try asking / पूछें:</span>
               <QuickChip text="Education Loan" onClick={() => handleSubmit("I need education loan")} />
-              <QuickChip text="वृद्धावस्था पेंशन" onClick={() => handleSubmit("मुझे वृद्धावस्था पेंशन चाहिए")} />
-              <QuickChip text="हमरा खातिर योजना" onClick={() => handleSubmit("हम बिहार से बानी, का योजना बा")} />
+              <QuickChip text="रोजगार" onClick={() => handleSubmit("मैं 40 साल का पुरुष हूं मेरे लिए योजना बताएं")} />
+              <QuickChip text="महिला सुरक्षा खातिर योजना" onClick={() => handleSubmit("महिला सुरक्षा खातिर योजना")} />
             </div>
           </motion.div>
         </div>
@@ -422,15 +422,15 @@ export default function Dashboard() {
                   <div className="space-y-6 mb-8">
                     <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/10">
                       <p className="text-sm text-slate-400 uppercase font-bold mb-1">Try saying:</p>
-                      <p className="text-lg text-white">"I am a student from Bihar looking for education loan."</p>
+                      <p className="text-lg text-white">"Suggest some employment related government schemes for a 40 years old."</p>
                     </div>
                     <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/10">
                       <p className="text-sm text-slate-400 uppercase font-bold mb-1">कोशिश करें:</p>
-                      <p className="text-lg text-white">"मैं बिहार का एक छात्र हूँ और मुझे शिक्षा लोन चाहिए।"</p>
+                      <p className="text-lg text-white">"40 वर्ष के व्यक्ति के लिए रोजगार संबंधी कुछ सरकारी योजनाएं सुझाएं।"</p>
                     </div>
                     <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/10">
                       <p className="text-sm text-slate-400 uppercase font-bold mb-1">ई बोल के देखीं:</p>
-                      <p className="text-lg text-white">"हम बिहार के छात्र बानी, हमरा पढ़ाई खातिर लोन चाही।"</p>
+                      <p className="text-lg text-white">"40 साल के व्यक्ति खातिर नौकरी अउरी रोज़गार से जुड़ल कुछ सरकारी योजना बताईं।"</p>
                     </div>
                   </div>
 

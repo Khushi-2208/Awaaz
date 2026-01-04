@@ -10,7 +10,7 @@ import { twMerge } from 'tailwind-merge';
 import { useAuth } from '@/lib/AuthContext';
 import { signOut } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -20,6 +20,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, loading } = useAuth();
+  const router = useRouter();
 
   const pathname = usePathname();
   const isAuthPage = pathname === '/auth';
@@ -48,6 +49,7 @@ export default function Navbar() {
     await signOut(auth);
     localStorage.removeItem('guest');
     setMobileMenuOpen(false);
+    router.push("/");
   };
 
   const showScrolledStyle = isAuthPage || isScrolled;
