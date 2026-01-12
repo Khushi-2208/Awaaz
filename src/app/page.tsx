@@ -41,14 +41,14 @@ const HERO_SLIDES = [
 ];
 
 const PROGRAMMES = [
-  { id: 1, title: "Education", desc: "Scholarships, loans, and skill development.", color: "bg-blue-600", icon: GraduationCap },
-  { id: 2, title: "Healthcare", desc: "Insurance, medicine, and maternity benefits.", color: "bg-rose-600", icon: Stethoscope },
-  { id: 3, title: "Livelihood", desc: "Employment, MNREGA, and business loans.", color: "bg-green-600", icon: Tractor },
-  { id: 4, title: "Women", desc: "Pension, safety, and self-help group funding.", color: "bg-orange-600", icon: Users },
-  { id: 5, title: "Housing", desc: "Affordable housing and water connection schemes.", color: "bg-teal-600", icon: Building2 },
-  { id: 6, title: "Social Security", desc: "Old age pensions and disability support.", color: "bg-yellow-600", icon: ShieldCheck },
-  { id: 7, title: "Digital Literacy", desc: "Free computer training and device access.", color: "bg-indigo-600", icon: Smartphone },
-  { id: 8, title: "Sanitation", desc: "Toilet construction and clean water initiatives.", color: "bg-cyan-600", icon: Globe },
+  { id: 1, key: 'education', title: "Education", desc: "Scholarships, loans, and skill development.", color: "bg-blue-600", icon: GraduationCap },
+  { id: 2, key: 'healthcare', title: "Healthcare", desc: "Insurance, medicine, and maternity benefits.", color: "bg-rose-600", icon: Stethoscope },
+  { id: 3, key: 'employment', title: "Livelihood", desc: "Employment, MNREGA, and business loans.", color: "bg-green-600", icon: Tractor },
+  { id: 4, key: 'women', title: "Women", desc: "Pension, safety, and self-help group funding.", color: "bg-orange-600", icon: Users },
+  { id: 5, key: 'housing', title: "Housing", desc: "Affordable housing and water connection schemes.", color: "bg-teal-600", icon: Building2 },
+  { id: 6, key: 'pension', title: "Social Security", desc: "Old age pensions and disability support.", color: "bg-yellow-600", icon: ShieldCheck },
+  { id: 7, key: 'banking', title: "Digital Literacy", desc: "Free computer training and device access.", color: "bg-indigo-600", icon: Smartphone },
+  { id: 8, key: 'sanitation', title: "Sanitation", desc: "Toilet construction and clean water initiatives.", color: "bg-cyan-600", icon: Globe },
 ];
 
 const TESTIMONIALS = [
@@ -180,14 +180,15 @@ export default function Home() {
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <AnimatePresence>
               {PROGRAMMES.slice(0, showAllProgrammes ? PROGRAMMES.length : 4).map((prog) => (
-                <ProgrammeCard
-                  key={prog.id}
-                  title={prog.title}
-                  desc={prog.desc}
-                  color={prog.color}
-                  icon={prog.icon}
-                />
-              ))}
+                  <ProgrammeCard
+                    key={prog.id}
+                    title={prog.title}
+                    desc={prog.desc}
+                    color={prog.color}
+                    icon={prog.icon}
+                    categoryKey={prog.key}  // ← Add this line
+                  />
+                ))}
             </AnimatePresence>
           </motion.div>
 
@@ -288,8 +289,8 @@ const AnimatedStat = ({ icon: Icon, value, label, suffix }: any) => {
   );
 };
 
-const ProgrammeCard = ({ title, desc, color, count, icon: Icon }: any) => (
-  <Link href={`/schemes/${title}`}>
+const ProgrammeCard = ({ title, desc, color, count, icon: Icon, categoryKey }: any) => (
+  <Link href={`/schemes/${categoryKey}`}>
     <motion.div
       layout
       initial={{ opacity: 0, scale: 0.9 }}
@@ -298,6 +299,7 @@ const ProgrammeCard = ({ title, desc, color, count, icon: Icon }: any) => (
       transition={{ duration: 0.3 }}
       className="group bg-white rounded-xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer hover:-translate-y-2"
     >
+      {/* Rest of the component remains the same */}
       <div className={`h-40 ${color} relative flex items-center justify-center`}>
         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-all" />
         <Icon className="text-white/80 group-hover:text-white group-hover:scale-110 transition-transform duration-500" size={64} />

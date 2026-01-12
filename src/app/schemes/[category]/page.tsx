@@ -93,20 +93,42 @@ const CATEGORY_INFO: Record<string, {
     icon: Smartphone,
     color: 'from-indigo-500 to-indigo-600'
   },
-  agriculture: {
+  sanitation: {
     title: 'Sanitation',
     titleHindi: 'स्वच्छता',
     titleBhojpuri: 'सफाई',
     description: 'Toilet construction and clean water initiatives',
     icon: Droplet,
     color: 'from-teal-500 to-teal-600'
-  }
+  },
+};
+
+const normalizeCategoryKey = (categoryParam: string): string => {
+  const normalized = categoryParam.toLowerCase().replace(/\s+/g, '');
+  
+  const categoryMap: Record<string, string> = {
+    'digitalliteracy': 'banking',
+    'sanitation': 'sanitation',
+    'education': 'education',
+    'healthcare': 'healthcare',
+    'livelihood': 'employment',
+    'employment': 'employment',
+    'womenpower': 'women',
+    'women': 'women',
+    'housing': 'housing',
+    'socialsecurity': 'pension',
+    'pension': 'pension'
+  };
+  
+  return categoryMap[normalized] || categoryParam.toLowerCase();
 };
 
 export default function CategorySchemesPage() {
   const params = useParams();
   const router = useRouter();
-  const category = params.category as string;
+  const categoryParam = params.category as string;
+
+  const category = normalizeCategoryKey(decodeURIComponent(categoryParam));
   
   const [schemes, setSchemes] = useState<Scheme[]>([]);
   const [isLoading, setIsLoading] = useState(true);
